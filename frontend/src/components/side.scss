@@ -1,0 +1,42 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 2rem;
+    .new{
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 1rem;
+        cursor: pointer;
+        background-color: #fff;
+        width: 6rem;
+        justify-content: center;
+        border-radius: 0.5rem;
+
+        &:hover{
+            background-color: rgba(135, 207, 235, 0.123);
+        }
+    }
+    .options{
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        .icons{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 1rem;
+            padding: 0.6rem;
+            &:hover{
+                background-color: rgba(128, 128, 128, 0.181);
+                border-radius: 5rem;
+            }
+            &:active{
+                background-color: rgba(135, 207, 235, 0.751);
+                border-radius: 5rem;
+            }
+        }
+    }
+}

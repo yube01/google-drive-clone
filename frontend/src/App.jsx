@@ -10,6 +10,9 @@ import MyDrive from "./page/MyDrive";
 import Computers from "./page/Computers";
 import Login from "./page/Login"
 import Signup from "./page/Signup"
+import "./App.css"
+
+
 
 function App() {
 
@@ -19,9 +22,11 @@ function App() {
       <div className="app">
 
         <Header/>
-        <Sidebar/>
-        <Outlet />
-        <LeftSide/>
+       <div className="main">
+       <div className="left"><Sidebar/></div>
+       <div className="middle"> <Outlet /></div>
+        <div className="right"><LeftSide/></div>
+       </div>
 
        
       </div>
