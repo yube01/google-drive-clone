@@ -1,13 +1,44 @@
+import { useState } from "react";
 import "./side.scss"
 
 
 const Sidebar = () => {
+
+  const [on,setOn] = useState(false)
+
+  const newSubmit = ()=>{
+    setOn(!on)
+   
+  }
+
+
+
   return (
     <div className="sidebar">
-      <div className="new">
+      <div className="new" onClick={newSubmit}>
         <span class="material-symbols-outlined">add</span>
         <p>New</p>
+        
+
       </div>
+      {on && (
+        <div className="container">
+          <div className="item ">
+            
+            <span class="material-symbols-outlined">create_new_folder</span> New
+            Folder
+          </div>
+          <div className="line"></div>
+          <div className="item ">
+            <span class="material-symbols-outlined">upload_file</span>File
+            upload
+          </div>
+          <div className="item">
+            <span class="material-symbols-outlined">drive_folder_upload</span>
+            Folder upload
+          </div>
+        </div>
+      )}
       <div className="options">
         <div className="icons" title="My Drive"><span class="material-symbols-rounded" >hard_drive_2</span>My Drive</div>
         <div className="icons" title="Computers"><span class="material-symbols-rounded" >devices</span>Computers</div>
