@@ -50,6 +50,9 @@
         }
         
     }
+    .inactive{
+        display: none;
+    }
     .options{
         display: flex;
         flex-direction: column;

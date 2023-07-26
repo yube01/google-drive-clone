@@ -7,9 +7,9 @@ const MyDrive = () => {
       <DropDown/>
     </div>
     <div className="dropDown">
-      <p>type</p>
-      <p>People</p>
-      <p>modified</p>
+      <p>Type  <span className="material-symbols-outlined">arrow_drop_down</span></p>
+      <p>People  <span className="material-symbols-outlined">arrow_drop_down</span></p>
+      <p>Modified  <span className="material-symbols-outlined">arrow_drop_down</span></p>
     </div>
     <div className="files">
       Files
