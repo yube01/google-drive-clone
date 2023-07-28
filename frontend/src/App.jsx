@@ -11,6 +11,7 @@ import Computers from "./page/Computers";
 import Login from "./page/Login"
 import Signup from "./page/Signup"
 import "./App.css"
+import { LoginProvider } from "./context/LoginContext";
 
 
 
@@ -64,8 +65,10 @@ function App() {
 
   return (
     <>
+<LoginProvider>
 
 <RouterProvider router={router} />
+</LoginProvider>
      
     </>
   )

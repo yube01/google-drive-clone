@@ -11,7 +11,9 @@ dotenv.config()
 
 const app = Express()
 
-app.use(cors())
+app.use(cors({
+    origin:"*"
+}))
 
 app.use(Express.json())
 

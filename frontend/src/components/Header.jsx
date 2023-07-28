@@ -12,15 +12,15 @@ const Header = () => {
       </div>
       <div className="search">
        
-        <span class="material-symbols-outlined" title="Search">search</span>
+        <span className="material-symbols-outlined" title="Search">search</span>
         <input type="text" placeholder="Search in Drive" />
-        <span class="material-symbols-outlined" title="Advanced Search">tune</span>
+        <span className="material-symbols-outlined" title="Advanced Search">tune</span>
       </div>
       </div>
       <div className="rights">
-        <span class="material-symbols-rounded">help</span>
-        <span class="material-symbols-rounded">settings</span>
-        <span class="material-symbols-rounded">
+        <span className="material-symbols-rounded">help</span>
+        <span className="material-symbols-rounded">settings</span>
+        <span className="material-symbols-rounded">
 apps
 </span>
 <span className="user">Y</span>

@@ -1,6 +1,30 @@
+import { useContext, useEffect } from "react"
 import DropDown from "../components/DropDown"
 import "./drive.scss"
+import { LoginContext } from "../context/LoginContext"
+import { useNavigate } from "react-router-dom"
 const MyDrive = () => {
+
+
+  const navigate = useNavigate()
+
+ 
+
+
+
+
+  const [logged, setLogged] = useContext(LoginContext)
+ 
+  useEffect(()=>{
+
+
+   
+    if(logged === false){
+      navigate("/login")
+    }
+    
+  },[navigate,logged,setLogged])
+
   return (
     <div className="myDrive">
     <div className="drive">
@@ -13,6 +37,7 @@ const MyDrive = () => {
     </div>
     <div className="files">
       Files
+      
     </div>
     </div>
   )
