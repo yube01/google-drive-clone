@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./authStyle.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -13,7 +13,15 @@ const Login = () => {
   const [logged, setLogged] = useContext(LoginContext)
 
   const navigate = useNavigate();
-  console.log(logged)
+  
+
+  useEffect(()=>{
+    const logData = localStorage.getItem("user")
+    if(logData){
+      setLogged(true)
+      navigate("/")
+    }
+  },[setLogged,navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +39,7 @@ const Login = () => {
   
         localStorage.setItem("user",JSON.stringify(response.data));
         
-  
+        setLogged(true)
         navigate("/");
       } catch (error) {
         setErr("User credential is invalid");

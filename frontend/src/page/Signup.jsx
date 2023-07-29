@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./authStyle.scss"
 import {Link, useNavigate} from 'react-router-dom'
 import axios from "axios"
+import { LoginContext } from "../context/LoginContext";
 
 
 
@@ -12,9 +13,20 @@ const Signup = () => {
   const[password,setPassword] = useState("")
   const[name,setName] = useState("")
   const [err,setErr] = useState("")
+
+    const [logged, setLogged] = useContext(LoginContext)
   
 
   const navigate = useNavigate()
+
+   useEffect(()=>{
+    const logData = localStorage.getItem("user")
+   
+    if(logData){
+      setLogged(true)
+      navigate("/")
+    }
+  },[setLogged,navigate])
 
 
 
