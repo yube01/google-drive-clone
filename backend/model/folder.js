@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 
 const folder = new mongoose.Schema({
-    name:{
+    folderId:{
         type:String,
         required:true,
         unique:true
     },
-    owner:{
-        typpe:String
+    userId:{
+        type:String
         
     }
 },{

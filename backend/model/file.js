@@ -6,6 +6,9 @@ const file = new mongoose.Schema({
         type:String,
         unique:true,
         required: true
+    },
+    folderId:{
+        type:String
     }
 
 },{

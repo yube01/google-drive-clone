@@ -1,4 +1,4 @@
-export const getFolder = async()=>{
+export const getFolder = async(req,res)=>{
 
 }
 
