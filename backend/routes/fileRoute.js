@@ -7,6 +7,6 @@ const router = express.Router()
 
 
 router.get("/getfiles",getFiles)
-router.post("/create",createFiles)
+router.post("/createFiles",createFiles)
 
 export default router

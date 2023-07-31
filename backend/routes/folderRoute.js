@@ -1,5 +1,5 @@
 import express from "express"
-import { createFolder, getFolder } from "../controller/folder"
+import { createFolder, getFolder } from "../controller/folder.js"
 
 
 
@@ -7,6 +7,6 @@ const router = express.Router()
 
 
 router.get("/getFolder",getFolder)
-router.post("/create",createFolder)
+router.post("/createFolder",createFolder)
 
 export default router

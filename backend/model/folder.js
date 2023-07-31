@@ -2,14 +2,13 @@ import mongoose from "mongoose";
 
 
 const folder = new mongoose.Schema({
-    folderId:{
+    folderName:{
         type:String,
         required:true,
         unique:true
     },
-    userId:{
-        type:String
-        
+    files:{
+        type:Array
     }
 },{
     timestamps:true

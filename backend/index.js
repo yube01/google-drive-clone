@@ -3,7 +3,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import mongoose from "mongoose";
 import authRoute from "./routes/authRoute.js"
-import folderRoute from "./routes/authRoute.js"
+import folderRoute from "./routes/folderRoute.js"
 import fileRoute from "./routes/fileRoute.js"
 
 
