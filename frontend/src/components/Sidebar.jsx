@@ -1,43 +1,53 @@
 import { useEffect, useState } from "react";
 import "./side.scss"
 import { useRef } from "react";
+import NewFolder from "./NewFolder";
 
 
 const Sidebar = () => {
 
   const [on,setOn] = useState(false)
+  const[folder,setFolder] = useState(false)
 
   let menuRef = useRef();
+  let folderRef = useRef()
+  
 
   useEffect(()=>{
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
         setOn(false);
-       
-      }      
+        
+       }   
+       if(!folderRef.current.contains(e.target)){
+        folder(false);
+        
+       }   
+      
     };
     document.addEventListener("mousedown",handler)
 
     return()=>{
       document.removeEventListener("mousedown",handler)
     }
-  },[])
+  },[folder])
+  console.log(folder)
 
 
 
   return (
     <div className="sidebar">
-      <div className="new" onClick={()=>{setOn(!on)}} >
+      <div className="new" onClick={()=>{setOn(!on)}}  >
         <span className="material-symbols-outlined">add</span>
         <p>New</p>
         
 
       </div>
       
-        <div className={`container ${on?'active':'inactive'}`}ref={menuRef}>
-          <div className="item ">
+        <div className={`container ${on?'active':'inactive'}`} ref={menuRef} onClick={()=>{setOn(!on)}} >
+          <div className={`item ${!folder?'active':'inactive'}`} onClick={()=>setFolder(!folder)} ref={folderRef}>
             
-            <span className="material-symbols-outlined">create_new_folder</span> New
+            <span className="material-symbols-outlined" >create_new_folder</span> New
             Folder
           </div>
           <div className="line"></div>
@@ -61,6 +71,7 @@ const Sidebar = () => {
         <div className="icons" title="Trash"><span className="material-symbols-rounded" >delete</span>Trash</div>
         <div className="icons" title="Storage"><span className="material-symbols-rounded" >cloud</span>Storage</div>
       </div>
+      {folder && <NewFolder setFolder={setFolder} folder={folder}/>}
     </div>
   );
 };
