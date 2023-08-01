@@ -10,7 +10,7 @@ const Sidebar = () => {
   const[folder,setFolder] = useState(false)
 
   let menuRef = useRef();
-  let folderRef = useRef()
+ 
   
 
   useEffect(()=>{
@@ -19,10 +19,7 @@ const Sidebar = () => {
         setOn(false);
         
        }   
-       if(!folderRef.current.contains(e.target)){
-        folder(false);
-        
-       }   
+       
       
     };
     document.addEventListener("mousedown",handler)
@@ -45,7 +42,7 @@ const Sidebar = () => {
       </div>
       
         <div className={`container ${on?'active':'inactive'}`} ref={menuRef} onClick={()=>{setOn(!on)}} >
-          <div className={`item ${!folder?'active':'inactive'}`} onClick={()=>setFolder(!folder)} ref={folderRef}>
+          <div className={`item`} onClick={()=>setFolder(!folder)} >
             
             <span className="material-symbols-outlined" >create_new_folder</span> New
             Folder

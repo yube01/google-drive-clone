@@ -3,19 +3,27 @@ import "./side.scss"
 import axios from "axios"
 
 const NewFolder = ({setFolder,folder}) => {
-    const [fname,setFname] = useState("")
+    const [folderName,setFolderName] = useState("")
+
+
+ 
+        const logData = JSON.parse(localStorage.getItem("user")) || null
+        
+        const owner = logData.name
+   
 
    const handleSubmit = async(e)=>{
     e.preventDefault()
 
     try {
         const res = await axios.post("http://localhost:9000/folder/createFolder",{
-            fname
+            folderName,
+            owner
         })
-        console.log(res)
+        console.log(res.data)
         
     } catch (error) {
-        console.log(error)
+        console.log(error.response.data)
         
     }
    }
@@ -24,11 +32,13 @@ const NewFolder = ({setFolder,folder}) => {
     <div className="newFolder">
         <div className="container">
            <p>New Folder</p>
-            <input type="text" placeholder="Folder name" value={fname} onChange={(e)=>setFname(e.target.value)}/>
+            <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="Folder name" value={folderName} onChange={(e)=>setFolderName(e.target.value)}/>
             <div className="btn">
                 <button onClick={()=>setFolder(!folder)}>Cancel</button>
-                <button onClick={handleSubmit}>Create</button>
+                <input type="submit" value="Create" />
             </div>
+            </form>
         </div>
       
     </div>
