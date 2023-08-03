@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./drop.scss"
+import NewFolder from "./NewFolder";
 
 
 
 const DropDown = () => {
   const [on, setOn] = useState(false);
+   const[folder,setFolder] = useState(false)
 
   let menuRef = useRef();
 
@@ -29,7 +31,7 @@ const DropDown = () => {
       </div>
      
       <div className={`container ${on?'active':'inactive'}`}>
-          <div className="item ">
+          <div className={`item`} onClick={()=>setFolder(!folder)}>
             
             <span className="material-symbols-outlined">create_new_folder</span> New
             Folder
@@ -44,7 +46,7 @@ const DropDown = () => {
             Folder upload
           </div>
         </div>
-    
+        {folder && <NewFolder setFolder={setFolder} folder={folder}/>}
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./side.scss"
 import { useRef } from "react";
 import NewFolder from "./NewFolder";
+import { Link } from "react-router-dom";
+
 
 
 const Sidebar = () => {
@@ -29,6 +31,8 @@ const Sidebar = () => {
     }
   },[folder])
   console.log(folder)
+
+  
 
 
 
@@ -59,7 +63,9 @@ const Sidebar = () => {
         </div>
       
       <div className="options">
+        <Link to="/" style={{textDecoration:"none",color:"inherit"}}>
         <div className="icons" title="My Drive"><span className="material-symbols-rounded" >hard_drive_2</span>My Drive</div>
+        </Link>
         <div className="icons" title="Computers"><span className="material-symbols-rounded" >devices</span>Computers</div>
         <div className="icons" title="Items shared with me"><span className="material-symbols-rounded" >group</span>Share with me</div>
         <div className="icons"title="Recent"><span className="material-symbols-rounded" >schedule</span>Recent</div>

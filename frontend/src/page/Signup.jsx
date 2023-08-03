@@ -42,7 +42,7 @@ const Signup = () => {
         })
     
     
-        console.log(response.data)
+        
         
           navigate("/login")
      

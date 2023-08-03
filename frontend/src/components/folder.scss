@@ -1,0 +1,30 @@
+.folders{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 0.5rem;
+    width: 15rem;
+    background-color: rgba(135, 207, 235, 0.381);
+    justify-content: space-between;
+    border-radius: 10px;
+    
+    
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(135, 207, 235, 0.614);
+    }
+    .fo{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        p{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 9rem;
+        }
+
+  
+    }
+}
