@@ -122,6 +122,10 @@
             font-size: 1rem;
             cursor: pointer;
             text-align: center;
+            &:hover{
+                background-color: rgba(128, 128, 128, 0.212);
+                border-radius: 1rem;
+            }
             
 
         }

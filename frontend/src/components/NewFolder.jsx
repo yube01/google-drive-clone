@@ -27,7 +27,7 @@ const NewFolder = ({setFolder,folder}) => {
                 owner
             })
             setFolder(!folder)
-            navigate("/")
+            navigate("/login")
             
         } catch (error) {
             console.log(error.response.data)

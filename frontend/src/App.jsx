@@ -12,6 +12,7 @@ import Login from "./page/Login"
 import Signup from "./page/Signup"
 import "./App.css"
 import { LoginProvider } from "./context/LoginContext";
+import File from "./components/File";
 
 
 
@@ -48,6 +49,10 @@ function App() {
           element: <Computers />,
           
         },
+        {
+          path:"/file",
+          element:<File/>
+        }
        
         
       ],
