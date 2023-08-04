@@ -2,13 +2,9 @@ import mongoose from "mongoose";
 
 
 const file = new mongoose.Schema({
-    name:{
+    file:{
         type:String,
-        unique:true,
-        required: true
-    },
-    folderId:{
-        type:String
+        
     }
 
 },{

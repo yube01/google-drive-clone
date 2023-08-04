@@ -1,5 +1,5 @@
 import express from "express"
-import { createFiles, getFiles } from "../controller/file.js"
+import { getFiles, uploadFiles } from "../controller/file.js"
 
 
 
@@ -7,6 +7,6 @@ const router = express.Router()
 
 
 router.get("/getfiles",getFiles)
-router.post("/createFiles",createFiles)
+router.post("/createFiles",uploadFiles)
 
 export default router
