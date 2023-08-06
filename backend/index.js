@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 import authRoute from "./routes/authRoute.js"
 import folderRoute from "./routes/folderRoute.js"
 import fileRoute from "./routes/fileRoute.js"
-import multer from "multer"
-import { File } from "./model/file.js";
+// import multer from "multer"
+// import { File } from "./model/file.js";
 
 
 
@@ -39,44 +39,44 @@ app.use("/files",fileRoute)
 
 
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '../frontend/src/images')
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now()
-      cb(null, uniqueSuffix + file.originalname)
-    }
-  })
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, '../frontend/src/images')
+//     },
+//     filename: function (req, file, cb) {
+//       const uniqueSuffix = Date.now()
+//       cb(null, uniqueSuffix + file.originalname)
+//     }
+//   })
   
-  const upload = multer({ storage: storage })
+//   const upload = multer({ storage: storage })
 
-app.post("/filesUp",upload.single("file"),async(req,res)=>{
+// app.post("/filesUp",upload.single("file"),async(req,res)=>{
 
 
-    const fileName = req.file.filename
+//     const fileName = req.file.filename
 
-    try {
-        await File.create({file:fileName})
-        res.status({status:'ok'})
+//     try {
+//         await File.create({file:fileName})
+//         res.status({status:'ok'})
         
-    } catch (error) {
-        console.log(err)
+//     } catch (error) {
+//         console.log(err)
         
-    }
+//     }
 
 
-})
-app.get("/fileDown",async(req,res)=>{
-    try {
-        File.find({}).then((data)=>{
-            res.send(data)
-        })
+// })
+// app.get("/fileDown",async(req,res)=>{
+//     try {
+//         File.find({}).then((data)=>{
+//             res.send(data)
+//         })
         
-    } catch (error) {
-        console.log(error)
-    }
-})
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })
 
 
 //server connection
