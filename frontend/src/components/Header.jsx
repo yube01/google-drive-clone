@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import drive from "../assets/drive.png";
 import "./head.scss"
 
@@ -6,10 +7,12 @@ const Header = () => {
   return (
     <div className="header">
       <div className="left">
+      <Link to="/" >
       <div className="logo"  title="Drive">
         <img src={drive} alt=""/>
         <p>Drive</p>
       </div>
+      </Link>
       <div className="search">
        
         <span className="material-symbols-outlined" title="Search">search</span>

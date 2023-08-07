@@ -13,6 +13,7 @@ import Signup from "./page/Signup"
 import "./App.css"
 import { LoginProvider } from "./context/LoginContext";
 import File from "./components/File";
+import { UserProvider } from "./context/UserContext";
 
 
 
@@ -50,7 +51,7 @@ function App() {
           
         },
         {
-          path:"/file",
+          path:"/file/:folderId",
           element:<File/>
         }
        
@@ -70,10 +71,12 @@ function App() {
 
   return (
     <>
+<UserProvider>
 <LoginProvider>
 
 <RouterProvider router={router} />
 </LoginProvider>
+</UserProvider>
      
     </>
   )

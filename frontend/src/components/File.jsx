@@ -1,17 +1,34 @@
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 import axios from "axios"
+
+
+import { useParams } from "react-router-dom"
+
 
 
 
 const File = () => {
 
+
   // const [files,setFiles] = useState(null)
   // const[gets,setGet] = useState(null)
+
+
+
+  const {folderId} = useParams()
+
+
+
+
   const[file,setFile] = useState(null)
 
   const[selectImg,setSelectImage] = useState("")
   const[fileName,setFileName] = useState(null)
 
+
+  const [dbFile,setDbFile] = useState([])
+
+  
   // const handleSubmit = async(e)=>{
   //   e.preventDefault()
   //   const formData  = new FormData()
@@ -41,6 +58,22 @@ const File = () => {
   //   console.log(result.data)
   //   setGet(result.data)
   // }
+useEffect(()=>{
+
+  const getFiles = async()=>{
+    try {
+      const response =  await axios.get("http://localhost:9000/files/getfiles/64c8f853386b0e5ef28e45a6")
+
+  setDbFile(response.data)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  getFiles()
+  
+},[])
+
 
   const handleSub = async()=>{
     setFileName(selectImg.name)
@@ -62,7 +95,7 @@ const File = () => {
     if(data.request.statusText === "OK"){
      
      setTimeout(async() => {
-      const response =  await axios.post("http://localhost:9000/files/createFiles",{file,fileName})
+      const response =  await axios.post("http://localhost:9000/files/createFiles",{file,fileName,folderId})
       console.log(response)
      }, 5000);
     
@@ -76,13 +109,13 @@ const File = () => {
       
     }
 
-    
 
 
 
   }
  
 
+console.log(dbFile)
 
   
 
@@ -94,6 +127,11 @@ const File = () => {
       </form> */}
       <input type="file" onChange={(e)=>{setSelectImage(e.target.files[0])}} />
       <button onClick={handleSub} >Upload</button>
+      {
+        dbFile.map((db)=>
+          (<img src={db.file}/>)
+        )
+      }
     
       
     </div>

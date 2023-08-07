@@ -5,6 +5,7 @@ import { LoginContext } from "../context/LoginContext"
 import {  useNavigate } from "react-router-dom"
 import Folders from "../components/Folders"
 import axios from "axios"
+import { UserContext } from "../context/UserContext"
 const MyDrive = () => {
 
 
@@ -15,7 +16,7 @@ const MyDrive = () => {
 
   const[folders,setFolders] = useState([])
 
-
+  const [ userId,setUserId] = useContext(UserContext)
   const [logged, setLogged] = useContext(LoginContext)
   const [loading,setLoading] = useState(false)
  
@@ -37,7 +38,7 @@ const MyDrive = () => {
       try {
         setLoading(true)
         const logData = JSON.parse(localStorage.getItem("user")) || null
-        
+        setUserId(logData._id)
         const response = await axios.get("http://localhost:9000/folder/getFolder/" + logData.name)
         setLoading(false)
         
@@ -73,7 +74,7 @@ const MyDrive = () => {
 
     {
       folders.map((f)=>(
-        <Folders f={f} key={f._id}/>
+        <Folders f={f} key={f._id} idF={f._id}/>
       ))
 
     }
