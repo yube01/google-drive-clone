@@ -10,11 +10,11 @@ export const uploadFiles = async(req,res)=>{
 
    
     try {
-        const{file}  = req.body
+        const{file,fileName}  = req.body
         
 
 
-        const newFile = new File({file})
+        const newFile = new File({file,fileName})
         const fileData = await newFile.save()
         res.status(200).json(fileData)
         
