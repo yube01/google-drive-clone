@@ -39,3 +39,26 @@ export const uploadFiles = async(req,res)=>{
 
 
 }
+
+
+export const editFile = async(req,res)=>{
+
+     try {
+        const {id} = req.params
+        const deleteFolder = await File.findByIdAndDelete(id)
+
+        if(!deleteFolder) return res.status(500).json("File not found")
+
+        res.status(200).json(deleteFolder)
+
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+export const deleteFile = async(req,res)=>{
+
+}

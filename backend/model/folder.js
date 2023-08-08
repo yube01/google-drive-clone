@@ -11,9 +11,6 @@ const folder = new mongoose.Schema({
         type:String,
         required:true
 
-    },
-    files:{
-        type:Array
     }
 },{
     timestamps:true

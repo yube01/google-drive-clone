@@ -45,3 +45,38 @@ export const createFolder = async(req,res)=>{
     }
 
 }
+
+
+export const editFolder = async(req,res)=>{
+
+    try {
+        const{id} = req.params
+        const edit = await Folder.findByIdAndUpdate(id,req.body)
+
+        if(!edit) return res.status(500).json("Folder not found")
+        res.status(200).json("Folder name updated")
+        
+    } catch (error) {
+        console.log(error)
+        
+    }
+
+}
+
+
+export const deleteFolder = async(req,res)=>{
+
+    try {
+        const {id} = req.params
+        const deleteFolder = await Folder.findByIdAndDelete(id)
+
+        if(!deleteFolder) return res.status(500).json("Folder not found")
+
+        res.status(200).json(deleteFolder)
+
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+}
