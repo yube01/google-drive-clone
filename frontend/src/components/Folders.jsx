@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
 import "./folder.scss"
-// import { useContext } from "react";
-// import { UserContext } from "../context/UserContext";
+import { useState } from "react";
+import Dot from "./Dot";
+
+
 
 const Folders = ({ f,idF }) => {
+
+  const [openDrop, setOpenDrop] = useState(false)
+
+  const opneDropBox = ()=>{
+    setOpenDrop(!openDrop)
+
+  }
   
 
-  // const [folderId,setFolderId] = useContext(UserContext)
-// console.log(idF)
-  // setFolderId(id)
-  // console.log(folderId)
   return (
     <div className="folders">
-      <Link to={`file/`+idF}>
+      <Link to={`file/`+idF} style={{ textDecoration:"none",color:"inherit"}} >
       <div className="fo">
     <span className="material-symbols-outlined">folder</span>
     <p>{f.folderName}</p>
@@ -20,7 +25,11 @@ const Folders = ({ f,idF }) => {
    
    </Link>
     
-    <span className="material-symbols-outlined">more_vert</span>
+    <span className="material-symbols-outlined dot" onClick={opneDropBox} >more_vert</span>
+    {
+      openDrop && 
+      <Dot/>
+    }
   </div>
     
   );

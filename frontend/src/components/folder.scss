@@ -7,7 +7,7 @@
     background-color: rgba(135, 207, 235, 0.381);
     justify-content: space-between;
     border-radius: 10px;
-    
+    position: relative;
     
     cursor: pointer;
     &:hover{
@@ -27,4 +27,11 @@
 
   
     }
+    .dot{
+        &:hover{
+            background-color: rgba(128, 128, 128, 0.353);
+            border-radius: 50%;
+        }
+    }
+    
 }

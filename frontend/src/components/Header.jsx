@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="left">
-      <Link to="/" >
+      <Link to="/" style={{ textDecoration:"none",color:"inherit"}}>
       <div className="logo"  title="Drive">
         <img src={drive} alt=""/>
         <p>Drive</p>

@@ -1,5 +1,6 @@
 .dropDowns{
     cursor: pointer;
+    
 
     .drive{
         display: flex;
@@ -8,6 +9,7 @@
         position: relative;
         padding: 0.5rem;
         width: 9.5rem;
+        
 
         &:hover{
             background-color: rgba(128, 128, 128, 0.237);
@@ -27,7 +29,7 @@
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         overflow: hidden;
         display: flex;
-     
+        z-index: 99;
         flex-direction: column;
         width: 15%;
         border-radius: 10px;
