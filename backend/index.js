@@ -15,7 +15,7 @@ dotenv.config()
 const app = Express()
 
 app.use(cors({
-    origin:"*"
+    origin:"http://localhost:5173/"
 }))
 
 app.use(Express.json())

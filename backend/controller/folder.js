@@ -40,7 +40,7 @@ export const createFolder = async(req,res)=>{
     res.status(200).json("Folder created")
         
     } catch (error) {
-        console.log(error)
+        console.log("error")
         
     }
 
@@ -51,13 +51,14 @@ export const editFolder = async(req,res)=>{
 
     try {
         const{id} = req.params
-        const edit = await Folder.findByIdAndUpdate(id,req.body)
+        const{folderName} = req.body
+        const edit = await Folder.findByIdAndUpdate(id,folderName)
 
         if(!edit) return res.status(500).json("Folder not found")
         res.status(200).json("Folder name updated")
         
     } catch (error) {
-        console.log(error)
+        console.log("error")
         
     }
 
