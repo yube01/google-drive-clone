@@ -6,6 +6,7 @@ import {  useNavigate } from "react-router-dom"
 import Folders from "../components/Folders"
 import axios from "axios"
 import { UserContext } from "../context/UserContext"
+
 const MyDrive = () => {
 
 
@@ -13,6 +14,7 @@ const MyDrive = () => {
 
  
 
+ 
 
   const[folders,setFolders] = useState([])
 
@@ -74,7 +76,7 @@ const MyDrive = () => {
 
     {
       folders.map((f)=>(
-        <Folders f={f} key={f._id} idF={f._id}/>
+        <Folders f={f} key={f._id} idF={f._id}  />
       ))
 
     }

@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
 import "./folder.scss"
-import { useState } from "react";
-import Dot from "./Dot";
+
+
+
 
 
 
 const Folders = ({ f,idF }) => {
 
-  const [openDrop, setOpenDrop] = useState(false)
 
-  const opneDropBox = ()=>{
-    setOpenDrop(!openDrop)
-
-  }
   
 
   return (
@@ -25,11 +21,7 @@ const Folders = ({ f,idF }) => {
    
    </Link>
     
-    <span className="material-symbols-outlined dot" onClick={opneDropBox} >more_vert</span>
-    {
-      openDrop && 
-      <Dot/>
-    }
+   
   </div>
     
   );
