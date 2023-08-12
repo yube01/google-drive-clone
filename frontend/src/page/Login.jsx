@@ -5,7 +5,7 @@ import axios from "axios";
 import { LoginContext } from "../context/LoginContext";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [err,setErr] = useState("")
 
@@ -26,15 +26,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(email.length === 0 && password.length === 0 ){
+    if(name.length === 0 && password.length === 0 ){
       setErr("Please fillup data in each section")
   }
 
     else{
       try {
-        const response = await axios.post("http://localhost:9000/auth/login", {
-          email,
+        const response = await axios.post("http://localhost:9001/auth/login", {
+          name,
           password,
+        },{
+          withCredentials:true
         });
   
         localStorage.setItem("user",JSON.stringify(response.data));
@@ -54,10 +56,10 @@ const Login = () => {
         <div className="error">{err}</div>
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="password"

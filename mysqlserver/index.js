@@ -1,8 +1,8 @@
 import express from "express"
 import cors from "cors"
 import { db } from "./model/dbconnect.js"
-
-
+import authUser from "./router/authRoute.js"
+import cookieParser from "cookie-parser"
 
 
 
@@ -10,9 +10,24 @@ import { db } from "./model/dbconnect.js"
 
 const app = express()
 
-app.use(cors())
+
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+
+app.use(cors(
+  {origin: 'http://localhost:5173'}
+))
 
 app.use(express.json())
+app.use(cookieParser())
+
+
+//middleware
+
+app.use("/auth",authUser)
 
 db.connect((err) =>{
     if (err) throw err;
