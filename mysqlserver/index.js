@@ -4,7 +4,7 @@ import { db } from "./model/dbconnect.js"
 import authUser from "./router/authRoute.js"
 import cookieParser from "cookie-parser"
 
-
+import post from "./router/folderRoute.js"
 
 
 
@@ -28,6 +28,7 @@ app.use(cookieParser())
 //middleware
 
 app.use("/auth",authUser)
+app.use("/post",post)
 
 db.connect((err) =>{
     if (err) throw err;
