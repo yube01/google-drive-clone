@@ -40,7 +40,7 @@ const Signup = () => {
           }
         );
 
-        toast("Register Successful", {
+        toast.success("Register Successful", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,

@@ -14,6 +14,7 @@ const MyDrive = () => {
 
  
 
+  
  
 
   const[folders,setFolders] = useState([])
@@ -21,9 +22,10 @@ const MyDrive = () => {
   const [ userId,setUserId] = useContext(UserContext)
   const [logged, setLogged] = useContext(LoginContext)
   const [loading,setLoading] = useState(false)
+
  
   useEffect(()=>{
-    if(logged === false){
+    if(logged === false ){
       navigate("/login")
     }
     
@@ -41,6 +43,7 @@ const MyDrive = () => {
         setLoading(true)
         const logData = JSON.parse(localStorage.getItem("user")) || null
         setUserId(logData._id)
+        
         const response = await axios.get("https://dull-puce-chicken-hat.cyclic.cloud/folder/getFolder/" + logData.name)
         setLoading(false)
         

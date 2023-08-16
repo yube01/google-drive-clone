@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import drive from "../assets/drive.png";
 import "./head.scss"
-import { useState } from "react";
+
 
 
 const Header = () => {
 
+
+
   
 
-  const logData = JSON.parse(localStorage.getItem("user")) || null
-  const firstLetter  = (logData.name).charAt(0).toUpperCase()
+  
+
+  
+    
+
   
   return (
     <div className="header">
@@ -33,7 +38,7 @@ const Header = () => {
         <span className="material-symbols-rounded">
 apps
 </span>
-<span className="user">{firstLetter}</span>
+<span className="user">{}</span>
       </div>
     </div>
   );
