@@ -1,8 +1,9 @@
 import {  useEffect, useState } from "react"
 import axios from "axios"
+import "./file.scss"
 
 
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 
@@ -27,6 +28,8 @@ const File = () => {
 
 
   const [dbFile,setDbFile] = useState([])
+  const [uploading,setUploading] = useState(false)
+  const [err,setError] = useState("")
 
   
   // const handleSubmit = async(e)=>{
@@ -58,10 +61,12 @@ const File = () => {
   //   console.log(result.data)
   //   setGet(result.data)
   // }
+  const navigate = useNavigate()
 useEffect(()=>{
 
   const getFiles = async()=>{
     try {
+      
       const response =  await axios.get("https://dull-puce-chicken-hat.cyclic.cloud/files/getfiles/"+folderId)
 
   setDbFile(response.data)
@@ -81,7 +86,7 @@ useEffect(()=>{
     
     try {
       const formData  = new FormData()
-
+      setUploading(true)
     formData.append("file",selectImg)
     formData.append("upload_preset","dsrtkzf0")
     const data = await axios.post("https://api.cloudinary.com/v1_1/dgoksuam1/image/upload",formData)
@@ -98,14 +103,16 @@ useEffect(()=>{
       const response =  await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/files/createFiles",{file,fileName,folderId})
       console.log(response)
      }, 10000);
+     setUploading(false)
     
 
     }
   
-
+    
 
     } catch (error) {
       console.log(error)
+      setError("Please upload again")
       
     }
 
@@ -113,9 +120,21 @@ useEffect(()=>{
 
 
   }
+
+  const handleDelete = async(e,id)=>{
+    e.preventDefault();
+    
+    try {
+      const response = await axios.delete(`https://dull-puce-chicken-hat.cyclic.cloud/files/deleteFile/${id}`);
+      console.log(response)
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+    }
+  }
  
 
-console.log(dbFile)
+
 
   
 
@@ -125,13 +144,28 @@ console.log(dbFile)
         <input type="file" accept="file/*" onChange={handleFile} />
         <button type="submit">Submit</button>
       </form> */}
-      <input type="file" onChange={(e)=>{setSelectImage(e.target.files[0])}} />
+     <div className="uploader">
+      <span>Upload photo</span>
+     <input type="file" onChange={(e)=>{setSelectImage(e.target.files[0])}}/>
       <button onClick={handleSub} >Upload</button>
-      {
+     </div>
+     {uploading ? "Photo uploading" : ""}
+     {err && err}
+     <div className="images">
+     {
         dbFile.map((db)=>
-          (<img src={db.file} height="200px"/>)
+        
+          (<div className="image" key={db._id}>
+            <div className="crud">
+              {/* <span className="material-symbols-outlined">edit</span> */}
+              <span className="material-symbols-outlined" onClick={(e)=>handleDelete(e,db._id)}>delete</span>
+            </div>
+            <img src={db.file} height="200px" width="200px"/>
+            
+            </div>)
         )
       }
+     </div>
     
       
     </div>

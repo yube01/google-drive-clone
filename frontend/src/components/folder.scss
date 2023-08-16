@@ -30,6 +30,29 @@
     .crud{
         display: flex;
         gap: 0.5rem;
+        position: relative;
+
+        form{
+            position: absolute;
+            top: 0;
+            background-color: #fff;
+            padding: 1rem;
+            z-index: 9;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            input{
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+                outline: none;
+            }
+            button{
+                padding: 0.5rem;
+                background-color: skyblue;
+                border: none;
+                cursor: pointer;
+            }
+            
+        }
     }
     
 }

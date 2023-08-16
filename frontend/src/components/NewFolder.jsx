@@ -2,6 +2,8 @@ import { useState } from "react"
 import "./side.scss"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewFolder = ({setFolder,folder}) => {
     const [folderName,setFolderName] = useState("")
@@ -28,9 +30,28 @@ const NewFolder = ({setFolder,folder}) => {
             })
             setFolder(!folder)
             navigate("/login")
+            toast("Folder Created", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
             
         } catch (error) {
-            console.log(error.response.data)
+            toast("Error", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
             
         }
     }
@@ -47,6 +68,7 @@ const NewFolder = ({setFolder,folder}) => {
                 <input type="submit" value="Create" />
             </div>
             </form>
+            <ToastContainer/>
         </div>
       
     </div>

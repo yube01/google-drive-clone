@@ -1,9 +1,11 @@
+import "./fils.scss"
 
-
-const Files = ({data}) => {
+const Files = ({db}) => {
   return (
     <div>
-        {data.file}
+        <div className="files">
+         
+        </div>
         
       
     </div>

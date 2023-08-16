@@ -3,6 +3,8 @@ import "./authStyle.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { LoginContext } from "../context/LoginContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -25,6 +27,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     if(name.length === 0 && password.length === 0 ){
       setErr("Please fillup data in each section")
@@ -41,8 +44,28 @@ const Login = () => {
         
         setLogged(true)
         navigate("/");
+        toast("Login Successful", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       } catch (error) {
-        setErr("User credential is invalid");
+        toast("User credential is invalid", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+       
       }
     }
   };
@@ -74,6 +97,7 @@ const Login = () => {
             Signup
           </Link>{" "}
         </p>
+        <ToastContainer/>
       </div>
     </div>
   );

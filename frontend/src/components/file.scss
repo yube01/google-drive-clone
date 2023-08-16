@@ -1,0 +1,50 @@
+.file{
+
+    padding: 2rem;
+    .uploader{
+        display: flex;
+        margin-bottom: 2rem;
+        align-items: center;
+        span{
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        input{
+            
+        }
+        button{
+            border: none;
+            padding: 0.5rem;
+            background-color: skyblue;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+    }
+
+    .images{
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        gap: 1rem;
+        .crud{
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.275);
+            padding: 0.5rem;
+            
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            span{
+                color: white;
+                cursor: pointer;
+            }
+        }
+        img{
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        
+    }
+
+}
+
