@@ -16,7 +16,7 @@ const Folders = ({ f, idF }) => {
   const handleEdit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.put("http://localhost:9000/folder/editFolder/ "+ idF,{
+      const response = await axios.put("https://dull-puce-chicken-hat.cyclic.cloud/folder/editFolder/ "+ idF,{
         folderName
       });
       console.log(response)

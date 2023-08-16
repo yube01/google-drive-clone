@@ -22,7 +22,7 @@ const NewFolder = ({setFolder,folder}) => {
         alert("Please enter folder name")
     }else{
         try {
-            const res = await axios.post("http://localhost:9000/folder/createFolder",{
+            const res = await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/folder/createFolder",{
                 folderName,
                 owner
             })

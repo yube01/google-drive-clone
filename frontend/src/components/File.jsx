@@ -62,7 +62,7 @@ useEffect(()=>{
 
   const getFiles = async()=>{
     try {
-      const response =  await axios.get("http://localhost:9000/files/getfiles/"+folderId)
+      const response =  await axios.get("https://dull-puce-chicken-hat.cyclic.cloud/files/getfiles/"+folderId)
 
   setDbFile(response.data)
       
@@ -95,7 +95,7 @@ useEffect(()=>{
     if(data.request.statusText === "OK"){
      
      setTimeout(async() => {
-      const response =  await axios.post("http://localhost:9000/files/createFiles",{file,fileName,folderId})
+      const response =  await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/files/createFiles",{file,fileName,folderId})
       console.log(response)
      }, 10000);
     
