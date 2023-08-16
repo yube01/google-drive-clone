@@ -35,8 +35,6 @@ const Login = () => {
         const response = await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/auth/login", {
           name,
           password,
-        },{
-          withCredentials:true
         });
   
         localStorage.setItem("user",JSON.stringify(response.data));
