@@ -37,7 +37,7 @@ const Signup = () => {
     }else{
       try {
 
-        const response = await axios.post("http://localhost:9001/auth/register",{
+        const response = await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/auth/register",{
           name,email,password
         })
     

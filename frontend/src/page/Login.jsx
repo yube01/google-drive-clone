@@ -32,7 +32,7 @@ const Login = () => {
 
     else{
       try {
-        const response = await axios.post("http://localhost:9001/auth/login", {
+        const response = await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/auth/login", {
           name,
           password,
         },{

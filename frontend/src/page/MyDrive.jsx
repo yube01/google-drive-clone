@@ -41,7 +41,7 @@ const MyDrive = () => {
         setLoading(true)
         const logData = JSON.parse(localStorage.getItem("user")) || null
         setUserId(logData._id)
-        const response = await axios.get("http://localhost:9000/folder/getFolder/" + logData.name)
+        const response = await axios.get("https://dull-puce-chicken-hat.cyclic.cloud/folder/getFolder/" + logData.name)
         setLoading(false)
         
       setFolders(response.data)
