@@ -78,7 +78,7 @@ useEffect(()=>{
   }
   getFiles()
   
-},[])
+},[folderId])
 
 
   const handleSub = async()=>{
@@ -92,26 +92,33 @@ useEffect(()=>{
     formData.append("upload_preset","dsrtkzf0")
     const data = await axios.post("https://api.cloudinary.com/v1_1/dgoksuam1/image/upload",formData)
     setFile(data.data.secure_url)
+    
    
       console.log(data)
 
     // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
     //   console.log("data saveed")
     // })
-    if(file !== null || fileName !== null){
-     
-     setTimeout(async() => {
-      const response =  await axios.post(url + "/files/createFiles",{file,fileName,folderId})
-      console.log(response)
-      setUploading(false)
-      navigate("/")
-     }, 5000);
-    
-    
 
-    }else{
-      alert("Error occur while uploadinf file")
-    }
+    setTimeout(async() => {
+      if(folderId){
+     
+       
+         const response =  await axios.post(url + "/files/createFiles",{file:data.data.secure_url,fileName:selectImg.name,folderId})
+         console.log(response)
+         setUploading(false)
+         navigate("/")
+        
+       
+       
+       
+   
+       }else{
+         alert("Error occur while uploading file")
+       }
+      
+    }, 5000);
+    
   
     
 
