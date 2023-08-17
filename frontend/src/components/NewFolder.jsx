@@ -4,6 +4,9 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { url } from "../utils/url";
+
+
 
 const NewFolder = ({setFolder,folder}) => {
     const [folderName,setFolderName] = useState("")
@@ -24,7 +27,7 @@ const NewFolder = ({setFolder,folder}) => {
         alert("Please enter folder name")
     }else{
         try {
-            const res = await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/folder/createFolder",{
+            const res = await axios.post(url + "/folder/createFolder",{
                 folderName,
                 owner
             })

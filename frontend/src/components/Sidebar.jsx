@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 import "./side.scss"
-import { useRef } from "react";
+
 import NewFolder from "./NewFolder";
 import { Link } from "react-router-dom";
 
@@ -11,13 +11,13 @@ const Sidebar = () => {
   const [on,setOn] = useState(false)
   const[folder,setFolder] = useState(false)
 
-  let menuRef = useRef();
+  let menuRefs = useRef();
  
   
 
   useEffect(()=>{
     let handler = (e)=>{
-      if(!menuRef.current.contains(e.target)){
+      if(!menuRefs.current.contains(e.target)){
         setOn(false);
         
        }   
@@ -30,22 +30,22 @@ const Sidebar = () => {
       document.removeEventListener("mousedown",handler)
     }
   },[folder])
-  console.log(folder)
+  
 
   
 
 
 
   return (
-    <div className="sidebar">
-      <div className="new" onClick={()=>{setOn(!on)}}  >
+    <div className="sidebar" ref={menuRefs}>
+      <div className={`new`}  onClick={()=>{setOn(!on)}}   >
         <span className="material-symbols-outlined">add</span>
         <p>New</p>
         
 
       </div>
       
-        <div className={`container ${on?'active':'inactive'}`} ref={menuRef} onClick={()=>{setOn(!on)}} >
+        <div className={`container ${on?'active':'inactives'}`} >
           <div className={`item`} onClick={()=>setFolder(!folder)} >
             
             <span className="material-symbols-outlined" >create_new_folder</span> New

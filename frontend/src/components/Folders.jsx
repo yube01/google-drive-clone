@@ -1,7 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./folder.scss";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { url } from "../utils/url";
+
+
 
 const Folders = ({ f, idF }) => {
 
@@ -10,15 +13,12 @@ const Folders = ({ f, idF }) => {
   const [deletes,setDeletes] = useState("")
   const navigate = useNavigate()
 
-  const formOpen = ()=>{
-    setOpen(!open)
 
-  }
 
   const handleEdit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.put(`https://dull-puce-chicken-hat.cyclic.cloud/folder/editFolder/${idF}`,{
+      const response = await axios.put(url + `/folder/editFolder/${idF}`,{
         rename
       });
       console.log(response)
@@ -32,16 +32,30 @@ const Folders = ({ f, idF }) => {
   const handleDelete = async(e)=>{
     e.preventDefault();
     try {
-      const response = await axios.delete(`https://dull-puce-chicken-hat.cyclic.cloud/folder/deleteFolder/${idF}`);
+      const response = await axios.delete(url + `/folder/deleteFolder/${idF}`);
       console.log(response)
       navigate("/login")
     } catch (error) {
       console.log(error);
     }
   }
+  let editBtn = useRef()
+  useEffect(()=>{
+    let handler = (e)=>{
+      if(!editBtn.current.contains(e.target)){
+        setOpen(false);
+       
+      }      
+    };
+    document.addEventListener("mousedown",handler)
+
+    return()=>{
+      document.removeEventListener("mousedown",handler)
+    }
+  },[])
 
   return (
-    <div className="folders">
+    <div className="folders" ref={editBtn}>
       <Link
         to={`file/` + idF}
         style={{ textDecoration: "none", color: "inherit" }}
@@ -52,7 +66,7 @@ const Folders = ({ f, idF }) => {
         </div>
       </Link>
       <div className="crud">
-        <span className="material-symbols-outlined" onClick={formOpen}>
+        <span className="material-symbols-outlined" onClick={()=>setOpen(!open)}>
           edit
         </span>
         {

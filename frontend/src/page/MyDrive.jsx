@@ -6,6 +6,7 @@ import {  useNavigate } from "react-router-dom"
 import Folders from "../components/Folders"
 import axios from "axios"
 import { UserContext } from "../context/UserContext"
+import { url } from "../utils/url"
 
 const MyDrive = () => {
 
@@ -44,7 +45,7 @@ const MyDrive = () => {
         const logData = JSON.parse(localStorage.getItem("user")) || null
         setUserId(logData._id)
         
-        const response = await axios.get("https://dull-puce-chicken-hat.cyclic.cloud/folder/getFolder/" + logData.name)
+        const response = await axios.get(url + "/folder/getFolder/" + logData.name)
         setLoading(false)
         
       setFolders(response.data)
@@ -87,6 +88,7 @@ const MyDrive = () => {
     
   </div>
     }
+    
     </div>
   )
 }

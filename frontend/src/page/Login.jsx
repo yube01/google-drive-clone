@@ -5,6 +5,9 @@ import axios from "axios";
 import { LoginContext } from "../context/LoginContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { url } from "../utils/url";
+
+
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -12,6 +15,7 @@ const Login = () => {
   const [err,setErr] = useState("")
 
 
+  
   const [logged, setLogged] = useContext(LoginContext)
 
   const navigate = useNavigate();
@@ -35,7 +39,7 @@ const Login = () => {
 
     else{
       try {
-        const response = await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/auth/login", {
+        const response = await axios.post(url+ "/auth/login", {
           name,
           password,
         });

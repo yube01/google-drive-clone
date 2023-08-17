@@ -5,6 +5,9 @@ import axios from "axios";
 import { LoginContext } from "../context/LoginContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { url } from "../utils/url";
+
+
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -32,7 +35,7 @@ const Signup = () => {
     } else {
       try {
         const response = await axios.post(
-          "https://dull-puce-chicken-hat.cyclic.cloud/auth/register",
+          url + "/auth/register",
           {
             name,
             email,

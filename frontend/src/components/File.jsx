@@ -4,6 +4,7 @@ import "./file.scss"
 
 
 import { useNavigate, useParams } from "react-router-dom"
+import { url } from "../utils/url"
 
 
 
@@ -67,7 +68,7 @@ useEffect(()=>{
   const getFiles = async()=>{
     try {
       
-      const response =  await axios.get("https://dull-puce-chicken-hat.cyclic.cloud/files/getfiles/"+folderId)
+      const response =  await axios.get(url + "/files/getfiles/"+folderId)
 
   setDbFile(response.data)
       
@@ -97,15 +98,19 @@ useEffect(()=>{
     // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
     //   console.log("data saveed")
     // })
-    if(data.request.statusText === "OK"){
+    if(file !== null || fileName !== null){
      
      setTimeout(async() => {
-      const response =  await axios.post("https://dull-puce-chicken-hat.cyclic.cloud/files/createFiles",{file,fileName,folderId})
+      const response =  await axios.post(url + "/files/createFiles",{file,fileName,folderId})
       console.log(response)
-     }, 10000);
-     setUploading(false)
+      setUploading(false)
+      navigate("/")
+     }, 5000);
+    
     
 
+    }else{
+      alert("Error occur while uploadinf file")
     }
   
     
