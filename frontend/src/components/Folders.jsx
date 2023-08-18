@@ -6,12 +6,14 @@ import { url } from "../utils/url";
 
 
 
-const Folders = ({ f, idF }) => {
+const Folders = ({ f, idF ,forceUpdate}) => {
 
   const [open,setOpen] = useState(false)
   const [rename,setRename] = useState("")
   const [deletes,setDeletes] = useState("")
   const navigate = useNavigate()
+  
+
 
 
 
@@ -22,7 +24,7 @@ const Folders = ({ f, idF }) => {
         rename
       });
       console.log(response)
-      navigate("/login")
+      forceUpdate()
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +36,7 @@ const Folders = ({ f, idF }) => {
     try {
       const response = await axios.delete(url + `/folder/deleteFolder/${idF}`);
       console.log(response)
-      navigate("/login")
+      forceUpdate()
     } catch (error) {
       console.log(error);
     }

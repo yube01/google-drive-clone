@@ -8,7 +8,7 @@ import { url } from "../utils/url";
 
 
 
-const NewFolder = ({setFolder,folder}) => {
+const NewFolder = ({setFolder,folder,forceUpdate}) => {
     const [folderName,setFolderName] = useState("")
 
 
@@ -18,6 +18,8 @@ const NewFolder = ({setFolder,folder}) => {
         const owner = logData.name
 
     const navigate = useNavigate()
+
+    
    
 
    const handleSubmit = async(e)=>{
@@ -32,8 +34,8 @@ const NewFolder = ({setFolder,folder}) => {
                 owner
             })
             setFolder(!folder)
-            navigate("/login")
-            toast("Folder Created", {
+            
+            toast.success("Folder Created", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -43,6 +45,8 @@ const NewFolder = ({setFolder,folder}) => {
                 progress: undefined,
                 theme: "dark",
               });
+              forceUpdate()
+              
             
         } catch (error) {
             toast("Error", {

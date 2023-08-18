@@ -13,23 +13,32 @@ import { UserProvider } from "./context/UserContext";
 import { CrudProvider } from "./context/CrudContext";
 import { useState } from "react";
 
+
+
 function App() {
-  // const [name,setName] = useState("")
+
+  // const [unmae,setUname] = useState("")
+ 
+
   // const logData = JSON.parse(localStorage.getItem("user")) || null
-  // if(logData !== null){
-  //   const firstLetter  = (logData.name).charAt(0).toUpperCase()
-  //   setName(firstLetter)
-   
-    
+  // console.log(logData)
+
+  // if(logData === null) {
+  
+  //   console.log("user data is null")
+
   // }else{
-  //   console.log("not found")
-    
+  //   const firstLetter  = (logData.name).charAt(0).toUpperCase()
+  //   setUname(firstLetter)
 
   // }
+ 
+
+  
   const Layout = () => {
     return (
       <div className="app">
-        <Header/>
+       <Header/>
         <div className="main">
           <div className="left">
             <Sidebar />

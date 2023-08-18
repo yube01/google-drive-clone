@@ -1,38 +1,28 @@
-import {  useEffect, useState } from "react"
-import axios from "axios"
-import "./file.scss"
+import { useEffect, useReducer, useState } from "react";
+import axios from "axios";
+import "./file.scss";
 
-
-import { useNavigate, useParams } from "react-router-dom"
-import { url } from "../utils/url"
-
-
-
+import { useNavigate, useParams } from "react-router-dom";
+import { url } from "../utils/url";
 
 const File = () => {
-
-
   // const [files,setFiles] = useState(null)
   // const[gets,setGet] = useState(null)
 
+  const { folderId } = useParams();
+
+  const [file, setFile] = useState(null);
+
+  const [selectImg, setSelectImage] = useState("");
+  const [fileName, setFileName] = useState(null);
+
+  const [dbFile, setDbFile] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [err, setError] = useState("");
 
 
-  const {folderId} = useParams()
+  const [reducerValue,forceUpdate] = useReducer(x=>x+1,0)
 
-
-
-
-  const[file,setFile] = useState(null)
-
-  const[selectImg,setSelectImage] = useState("")
-  const[fileName,setFileName] = useState(null)
-
-
-  const [dbFile,setDbFile] = useState([])
-  const [uploading,setUploading] = useState(false)
-  const [err,setError] = useState("")
-
-  
   // const handleSubmit = async(e)=>{
   //   e.preventDefault()
   //   const formData  = new FormData()
@@ -44,14 +34,12 @@ const File = () => {
   //     }
   //   })
 
-
   // }
   // useEffect(()=>{
   //   getImage()
   // },[])
 
   // const handleFile = (e)=>{
-   
 
   //   console.log(e.target.files[0])
   //   setFiles(e.target.files[0])
@@ -62,93 +50,75 @@ const File = () => {
   //   console.log(result.data)
   //   setGet(result.data)
   // }
-  const navigate = useNavigate()
-useEffect(()=>{
+  const navigate = useNavigate();
+  useEffect(() => {
+    const getFiles = async () => {
+      try {
+        const response = await axios.get(url + "/files/getfiles/" + folderId);
 
-  const getFiles = async()=>{
+        setDbFile(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFiles();
+  }, [folderId,reducerValue]);
+
+  const handleSub = async () => {
+    setFileName(selectImg.name);
+
     try {
-      
-      const response =  await axios.get(url + "/files/getfiles/"+folderId)
+      const formData = new FormData();
+      setUploading(true);
+      formData.append("file", selectImg);
+      formData.append("upload_preset", "dsrtkzf0");
+      const data = await axios.post(
+        "https://api.cloudinary.com/v1_1/dgoksuam1/image/upload",
+        formData
+      );
+      setFile(data.data.secure_url);
 
-  setDbFile(response.data)
-      
+      console.log(data);
+
+      // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
+      //   console.log("data saveed")
+      // })
+
+      setTimeout(async () => {
+        if (folderId) {
+          const response = await axios.post(url + "/files/createFiles", {
+            file: data.data.secure_url,
+            fileName: selectImg.name,
+            folderId,
+          });
+          console.log(response);
+          setUploading(false);
+           forceUpdate()
+        } else {
+          alert("Error occur while uploading file");
+        }
+      }, 1000);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      setError("Please upload again");
     }
-  }
-  getFiles()
-  
-},[folderId])
+  };
 
-
-  const handleSub = async()=>{
-    setFileName(selectImg.name)
-
-    
-    try {
-      const formData  = new FormData()
-      setUploading(true)
-    formData.append("file",selectImg)
-    formData.append("upload_preset","dsrtkzf0")
-    const data = await axios.post("https://api.cloudinary.com/v1_1/dgoksuam1/image/upload",formData)
-    setFile(data.data.secure_url)
-    
-   
-      console.log(data)
-
-    // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
-    //   console.log("data saveed")
-    // })
-
-    setTimeout(async() => {
-      if(folderId){
-     
-       
-         const response =  await axios.post(url + "/files/createFiles",{file:data.data.secure_url,fileName:selectImg.name,folderId})
-         console.log(response)
-         setUploading(false)
-         navigate("/")
-        
-       
-       
-       
-   
-       }else{
-         alert("Error occur while uploading file")
-       }
-      
-    }, 5000);
-    
-  
-    
-
-    } catch (error) {
-      console.log(error)
-      setError("Please upload again")
-      
-    }
-
-
-
-
-  }
-
-  const handleDelete = async(e,id)=>{
+  const handleDelete = async (e, id) => {
     e.preventDefault();
-    
+
     try {
-      const response = await axios.delete(`https://dull-puce-chicken-hat.cyclic.cloud/files/deleteFile/${id}`);
-      console.log(response)
-      navigate("/")
+      const response = await axios.delete(
+        `https://dull-puce-chicken-hat.cyclic.cloud/files/deleteFile/${id}`
+      );
+      console.log(response);
+      forceUpdate()
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
  
-
-
-
-  
 
   return (
     <div className="file">
@@ -156,33 +126,36 @@ useEffect(()=>{
         <input type="file" accept="file/*" onChange={handleFile} />
         <button type="submit">Submit</button>
       </form> */}
-     <div className="uploader">
-      <span>Upload photo</span>
-     <input type="file" onChange={(e)=>{setSelectImage(e.target.files[0])}}/>
-      <button onClick={handleSub} >Upload</button>
-     </div>
-     {uploading ? "Photo uploading" : ""}
-     {err && err}
-     <div className="images">
-     {
-        dbFile.map((db)=>
-        
-          (<div className="image" key={db._id}>
+      <div className="uploader">
+        <span>Upload photo</span>
+        <input
+          type="file"
+          onChange={(e) => {
+            setSelectImage(e.target.files[0]);
+          }}
+        />
+        <button onClick={handleSub}>Upload</button>
+      </div>
+      {uploading ? "Photo uploading" : ""}
+      {err && err}
+      <div className="images">
+        {dbFile.map((db) => (
+          <div className="image" key={db._id}>
             <div className="crud">
               {/* <span className="material-symbols-outlined">edit</span> */}
-              <span className="material-symbols-outlined" onClick={(e)=>handleDelete(e,db._id)}>delete</span>
+              <span
+                className="material-symbols-outlined"
+                onClick={(e) => handleDelete(e, db._id)}
+              >
+                delete
+              </span>
             </div>
-            <img src={db.file} height="200px" width="200px"/>
-            
-            </div>)
-        )
-      }
-     </div>
-    
-      
+            <img src={db.file} height="200px" width="200px" />
+          </div>
+        ))}
+      </div>
     </div>
-   
-  )
-}
+  );
+};
 
-export default File
+export default File;

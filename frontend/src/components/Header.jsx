@@ -1,27 +1,50 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import drive from "../assets/drive.png";
 import "./head.scss"
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LoginContext } from "../context/LoginContext";
+
 
 
 
 const Header = () => {
 
-  // const [unmae,setUname] = useState("")
+
+  const [unmae,setUname] = useState("")
+  const navigate = useNavigate()
+
+    const [logged, setLogged] = useContext(LoginContext)
+ 
+    useEffect(()=>{
+    if(logged === false ){
+      navigate("/login")
+    }
+    
+  },[navigate,logged,setLogged])
+  useEffect(()=>{
 
 
-  // const logData = JSON.parse(localStorage.getItem("user")) || null
+  },[])
+
+ 
+
   
-  // if(logData === null) {
-  //   setUname("Invalid")
-
-  // }else{
-  //   const firstLetter  = (logData.name).charAt(0).toUpperCase()
-  //   setUname(firstLetter)
-
-  // }
+  useEffect(()=>{
+    
+    const logData = JSON.parse(localStorage.getItem("user"))
+    console.log(logData)
+    if(logData === null) {
   
+   navigate("/login")
 
+  }else{
+    const firstLetter  = (logData.name).charAt(0).toUpperCase()
+    setUname(firstLetter)
+
+  }
+
+
+  },[navigate])
   
 
   
@@ -50,7 +73,7 @@ const Header = () => {
         <span className="material-symbols-rounded">
 apps
 </span>
-<span className="user">A</span>
+<span className="user">{unmae ? unmae :""}</span>
       </div>
     </div>
   );

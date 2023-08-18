@@ -1,4 +1,4 @@
-import { useEffect, useState ,useRef} from "react";
+import { useEffect, useState ,useRef, useReducer} from "react";
 import "./side.scss"
 
 import NewFolder from "./NewFolder";
@@ -31,6 +31,7 @@ const Sidebar = () => {
     }
   },[folder])
   
+  const [forceUpdate] = useReducer(x=>x+1,0)
 
   
 
@@ -74,7 +75,7 @@ const Sidebar = () => {
         <div className="icons" title="Trash"><span className="material-symbols-rounded" >delete</span>Trash</div>
         <div className="icons" title="Storage"><span className="material-symbols-rounded" >cloud</span>Storage</div>
       </div>
-      {folder && <NewFolder setFolder={setFolder} folder={folder}/>}
+      {folder && <NewFolder setFolder={setFolder} folder={folder} forceUpdate={forceUpdate}/>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import DropDown from "../components/DropDown"
 import "./drive.scss"
 import { LoginContext } from "../context/LoginContext"
@@ -23,6 +23,7 @@ const MyDrive = () => {
   const [ userId,setUserId] = useContext(UserContext)
   const [logged, setLogged] = useContext(LoginContext)
   const [loading,setLoading] = useState(false)
+  const [reducerValue, forceUpdate] = useReducer(x=>x+1,0)
 
  
   useEffect(()=>{
@@ -60,7 +61,7 @@ const MyDrive = () => {
    
     
 
-},[])
+},[setUserId,reducerValue])
 
 
 
@@ -68,7 +69,7 @@ const MyDrive = () => {
   return (
     <div className="myDrive">
     <div className="drive">
-      <DropDown name={"My Drive"}/>
+      <DropDown forceUpdate={forceUpdate}/>
     </div>
     <div className="dropDown">
       <p>Type  <span className="material-symbols-outlined">arrow_drop_down</span></p>
@@ -80,7 +81,7 @@ const MyDrive = () => {
 
     {
       folders.map((f)=>(
-        <Folders f={f} key={f._id} idF={f._id}  />
+        <Folders f={f} key={f._id} idF={f._id}  forceUpdate={forceUpdate} />
       ))
 
     }

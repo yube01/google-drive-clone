@@ -4,7 +4,7 @@ import NewFolder from "./NewFolder";
 
 
 
-const DropDown = () => {
+const DropDown = ({forceUpdate}) => {
   const [on, setOn] = useState(false);
    const[folder,setFolder] = useState(false)
 
@@ -47,7 +47,7 @@ const DropDown = () => {
             Folder upload
           </div>
         </div>
-        {folder && <NewFolder setFolder={setFolder} folder={folder}/>}
+        {folder && <NewFolder setFolder={setFolder} folder={folder} forceUpdate={forceUpdate}/>}
     </div>
   );
 };
