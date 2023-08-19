@@ -1,3 +1,6 @@
+@import "../style.scss";
+
+
 .header{
     display: flex;
     padding: 1rem;
@@ -8,6 +11,10 @@
         display: flex;
         gap: 8rem;
         align-items: center;
+        @include mobile{
+           gap: 1rem;
+           
+        }
         .logo{
         display: flex;
         align-items: center;
@@ -17,6 +24,10 @@
 
         img{
             height: 3rem;
+            @include mobile{
+                height: 1.5rem;
+               
+            }
             
         }
         p{
@@ -32,12 +43,24 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        @include mobile{
+            gap:0.2rem;
+            padding: 0;
+            
+           
+        }
         input{
             border: none;
             outline: none;
             font-size: 1.2rem;
             width: 35rem;
             background-color: transparent;
+            @include mobile{
+                width: 100%;
+                font-size: 1rem;
+                
+               
+            }
         }
         span{
             cursor: pointer;
@@ -54,6 +77,10 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        @include mobile{
+            display: none;
+           
+        }
       
         span{
             cursor: pointer;

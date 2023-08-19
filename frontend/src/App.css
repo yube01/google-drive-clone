@@ -24,3 +24,19 @@
  
 }
 
+
+@media only screen and (max-width: 500px) {
+  .left{
+    display: none;
+  }
+  .middle{
+    margin-left: 0.5rem;
+  }
+
+  .right{
+    display: none;
+  }
+
+
+}
+

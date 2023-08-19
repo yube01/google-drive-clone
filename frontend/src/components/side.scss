@@ -1,8 +1,14 @@
+@import "../style.scss";
+
 .sidebar{
     display: flex;
     flex-direction: column;
     padding: 1rem;
     gap: 2rem;
+    @include mobile{
+       display: none;
+       
+    }
     .new{
         display: flex;
         align-items: center;
@@ -85,20 +91,39 @@
 .newFolder{
     
     
+    
     .container{
        position: fixed;
        top: 40%;
        right: 50%;
       padding: 2rem;
       display: flex;
+      width: max-content;
+      @include mobile{
+        
+        top:30%;
+        right:10%;
+        padding: 1rem;
+       
+    }
+      
       p{
         font-size: 1.4rem;
         font-weight: 400;
         margin-bottom: 1rem;
+        @include mobile{
+           font-size: 1rem;
+           
+        }
       }
       input{
         padding: 1rem;
         margin-bottom: 1rem;
+        @include mobile{
+            margin-bottom: 0.2rem;
+            padding: 0.5rem;
+           
+        }
         
       }
       .btn{
@@ -126,6 +151,10 @@
             &:hover{
                 background-color: rgba(128, 128, 128, 0.212);
                 border-radius: 1rem;
+            }
+            @include mobile{
+                margin-top: 0.1rem;
+               
             }
             
 

@@ -1,8 +1,16 @@
+@import "../style.scss";
+
 .myDrive{
     padding: 2rem;
     display: flex;
     gap: 2rem;
     flex-direction: column;
+    @include mobile{
+        gap: 1rem;
+        padding: 0.5rem;
+        
+       
+    }
     .dropDown{
         display: flex;
         gap: 1rem;
@@ -17,6 +25,12 @@
             gap: 0.5rem;
             &:hover{
                 background-color: rgba(128, 128, 128, 0.154);
+            }
+
+            @include mobile{
+            
+               display: none;
+               
             }
         }
     }

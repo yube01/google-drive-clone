@@ -4,6 +4,7 @@ import "./file.scss";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { url } from "../utils/url";
+import { uploadFile } from '@uploadcare/upload-client'
 
 const File = () => {
   // const [files,setFiles] = useState(null)
@@ -118,6 +119,19 @@ const File = () => {
     }
   };
 
+  // const handleFile = async()=>{
+    
+  //   const result = await uploadFile(selectImg, {
+  //     publicKey: '81db13eaa3038936b020',
+  //     store: 'auto',
+  //     metadata: {
+  //       subsystem: 'uploader',
+  //       pet: 'cat'
+  //     }
+  //   })
+  //   console.log(`URL: ${file.cdnUrl}`)
+  // }
+
  
 
   return (
@@ -135,6 +149,13 @@ const File = () => {
           }}
         />
         <button onClick={handleSub}>Upload</button>
+        {/* <input
+          type="file"
+          onChange={(e) => {
+            setSelectImage(e.target.files[0]);
+          }}
+        />
+        <button onClick={handleFile}>Upload</button> */}
       </div>
       {uploading ? "Photo uploading" : ""}
       {err && err}

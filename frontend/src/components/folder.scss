@@ -1,3 +1,5 @@
+@import "../style.scss";
+
 .folders{
     display: flex;
     align-items: center;
@@ -8,6 +10,11 @@
     justify-content: space-between;
     border-radius: 10px;
     position: relative;
+    @include mobile{
+        width: 10rem;
+        padding: 0.5rem;
+       
+    }
     
     cursor: pointer;
     &:hover{
@@ -23,6 +30,11 @@
             overflow: hidden;
             white-space: nowrap;
             width: 9rem;
+            @include mobile{
+                width: 3rem;
+                font-size: 0.8rem;
+               
+            }
         }
 
   
@@ -31,6 +43,11 @@
         display: flex;
         gap: 0.5rem;
         position: relative;
+        @include mobile{
+            gap: 0.2rem;
+           
+        }
+        
 
         form{
             position: absolute;

@@ -1,3 +1,5 @@
+@import "../style.scss";
+
 .dropDowns{
     cursor: pointer;
     
@@ -16,6 +18,11 @@
         border-radius: 2rem;
 
         }
+        @include mobile{
+           font-size: 1rem;
+           width: max-content;
+           
+        }
 
         
     }
@@ -31,7 +38,7 @@
         display: flex;
         z-index: 99;
         flex-direction: column;
-        width: 15%;
+        width: max-content;
         border-radius: 10px;
         position: absolute;
         .item{
