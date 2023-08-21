@@ -17,7 +17,6 @@ const NewFolder = ({setFolder,folder,forceUpdate}) => {
         
         const owner = logData.name
 
-    const navigate = useNavigate()
 
     
    
@@ -34,7 +33,7 @@ const NewFolder = ({setFolder,folder,forceUpdate}) => {
                 owner
             })
             setFolder(!folder)
-            console.log(res)
+            
             
             toast.success("Folder Created", {
                 position: "bottom-right",
@@ -47,9 +46,10 @@ const NewFolder = ({setFolder,folder,forceUpdate}) => {
                 theme: "dark",
               });
               setTimeout(() => {
-                navigate("/")
+                forceUpdate()
                 
-              }, 3000);
+              },2000);
+            
               
             
         } catch (error) {

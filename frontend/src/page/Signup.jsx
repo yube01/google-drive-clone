@@ -60,8 +60,8 @@ const Signup = () => {
           
         }, 5000);
       } catch (error) {
-        console.log(error)
-        toast.error("Register Failure", {
+        
+        toast.error(error.response.data, {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,

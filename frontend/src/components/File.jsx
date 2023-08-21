@@ -23,8 +23,7 @@ const File = () => {
   const [uploading, setUploading] = useState(false);
   const [err, setError] = useState("");
 
-
-  const [reducerValue,forceUpdate] = useReducer(x=>x+1,0)
+  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   // const handleSubmit = async(e)=>{
   //   e.preventDefault()
@@ -53,7 +52,7 @@ const File = () => {
   //   console.log(result.data)
   //   setGet(result.data)
   // }match
- 
+
   useEffect(() => {
     const getFiles = async () => {
       try {
@@ -65,16 +64,73 @@ const File = () => {
       }
     };
     getFiles();
-  }, [folderId,reducerValue]);
+  }, [folderId, reducerValue]);
 
   const handleSub = async () => {
     setFileName(selectImg.name);
-    console.log(selectImg.size)
+    
+    if (selectImg.size < 10000000) {
+      try {
+        const load = toast.loading("Photo uploading", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        const formData = new FormData();
+        setUploading(true);
+        
+        formData.append("file", selectImg);
+        formData.append("upload_preset", "dsrtkzf0");
+        const data = await axios.post(
+          "https://api.cloudinary.com/v1_1/dgoksuam1/image/upload",
+          formData
+        );
+        setFile(data.data.secure_url);
 
-    try {
-      const formData = new FormData();
-      setUploading(true);
-      const load = toast.loading("Photo uploading", {
+        console.log(data);
+
+        // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
+        //   console.log("data saveed")
+        // })
+
+        setTimeout(async () => {
+          if (folderId) {
+            const response = await axios.post(url + "/files/createFiles", {
+              file: data.data.secure_url,
+              fileName: selectImg.name,
+              folderId,
+            });
+            console.log(response);
+            setUploading(false);
+            toast.dismiss(load);
+            toast.success("Photo uploaded", {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+
+            forceUpdate();
+          } else {
+            alert("Error occur while uploading file");
+          }
+        }, 1000);
+      } catch (error) {
+        console.log(error.message);
+
+        setError("Please upload again");
+      }
+    } else {
+      toast.error("Picture size is greater than 10MB", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -84,63 +140,16 @@ const File = () => {
         progress: undefined,
         theme: "dark",
       });
-      formData.append("file", selectImg);
-      formData.append("upload_preset", "dsrtkzf0");
-      const data = await axios.post(
-        "https://api.cloudinary.com/v1_1/dgoksuam1/image/upload",
-        formData
-      );
-      setFile(data.data.secure_url);
       
-
-      console.log(data);
-
-      // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
-      //   console.log("data saveed")
-      // })
-      
-      
-      setTimeout(async () => {
-        if (folderId) {
-          const response = await axios.post(url + "/files/createFiles", {
-            file: data.data.secure_url,
-            fileName: selectImg.name,
-            folderId,
-          });
-          console.log(response);
-          setUploading(false);
-          toast.dismiss(load)
-          toast.success("Photo uploaded", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          
-           forceUpdate()
-        } else {
-          alert("Error occur while uploading file");
-        }
-      }, 1000);
-      
-    } catch (error) {
-      console.log(error.message);
-      
-      setError("Please upload again");
     }
   };
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
-    
 
     try {
-      const conformation = confirm("Do you want to delete this photo??")
-      if(conformation){
+      const conformation = confirm("Do you want to delete this photo??");
+      if (conformation) {
         const response = await axios.delete(
           `https://dull-puce-chicken-hat.cyclic.cloud/files/deleteFile/${id}`
         );
@@ -155,12 +164,10 @@ const File = () => {
           theme: "dark",
         });
         console.log(response);
-       setTimeout(() => {
-        forceUpdate()
-       }, 3000);
-        
-      }else{
-
+        setTimeout(() => {
+          forceUpdate();
+        }, 3000);
+      } else {
         toast.warning("Process cancelled", {
           position: "bottom-right",
           autoClose: 5000,
@@ -171,7 +178,6 @@ const File = () => {
           progress: undefined,
           theme: "dark",
         });
-
       }
     } catch (error) {
       console.log(error);
@@ -179,7 +185,7 @@ const File = () => {
   };
 
   // const handleFile = async()=>{
-    
+
   //   const result = await uploadFile(selectImg, {
   //     publicKey: '81db13eaa3038936b020',
   //     store: 'auto',
@@ -191,17 +197,17 @@ const File = () => {
   //   console.log(`URL: ${file.cdnUrl}`)
   // }
 
- 
-
   return (
     <div className="file">
+        <ToastContainer />
       {/* <form onSubmit={handleSubmit}>
         <input type="file" accept="file/*" onChange={handleFile} />
         <button type="submit">Submit</button>
       </form> */}
       <div className="uploader">
         <span>Upload photo</span>
-        <br/>
+        
+        <br />
         <input
           type="file"
           onChange={(e) => {
@@ -219,6 +225,7 @@ const File = () => {
       </div>
       {uploading ? "Photo uploading" : ""}
       {err && err}
+      <p style={{marginBottom:"1rem",color:"grey"}}>Please upload picture which has size less than 10MB</p>
       <div className="images">
         {dbFile.map((db) => (
           <div className="image" key={db._id}>
@@ -230,9 +237,9 @@ const File = () => {
               >
                 delete
               </span>
-              <ToastContainer/>
+            
             </div>
-            <img src={db.file}  />
+            <img src={db.file} />
           </div>
         ))}
       </div>
