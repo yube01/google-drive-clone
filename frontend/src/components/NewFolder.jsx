@@ -34,6 +34,7 @@ const NewFolder = ({setFolder,folder,forceUpdate}) => {
                 owner
             })
             setFolder(!folder)
+            console.log(res)
             
             toast.success("Folder Created", {
                 position: "bottom-right",
@@ -45,10 +46,13 @@ const NewFolder = ({setFolder,folder,forceUpdate}) => {
                 progress: undefined,
                 theme: "dark",
               });
-              forceUpdate()
+              setTimeout(() => {
+                forceUpdate()
+              }, 3000);
               
             
         } catch (error) {
+            console.log(error)
             toast("Error", {
                 position: "bottom-right",
                 autoClose: 5000,

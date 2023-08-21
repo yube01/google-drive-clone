@@ -4,7 +4,9 @@ import "./file.scss";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { url } from "../utils/url";
-import { uploadFile } from '@uploadcare/upload-client'
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const File = () => {
   // const [files,setFiles] = useState(null)
@@ -51,7 +53,7 @@ const File = () => {
   //   console.log(result.data)
   //   setGet(result.data)
   // }
-  const navigate = useNavigate();
+ 
   useEffect(() => {
     const getFiles = async () => {
       try {
@@ -71,6 +73,16 @@ const File = () => {
     try {
       const formData = new FormData();
       setUploading(true);
+      const load = toast.loading("Photo uploading", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       formData.append("file", selectImg);
       formData.append("upload_preset", "dsrtkzf0");
       const data = await axios.post(
@@ -78,12 +90,14 @@ const File = () => {
         formData
       );
       setFile(data.data.secure_url);
+      
 
       console.log(data);
 
       // await axios.post("http://localhost:9000/files/createFiles/"+url).then((response)=>{
       //   console.log("data saveed")
       // })
+      
 
       setTimeout(async () => {
         if (folderId) {
@@ -94,11 +108,24 @@ const File = () => {
           });
           console.log(response);
           setUploading(false);
+          toast.dismiss(load)
+          toast.success("Photo uploaded", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          
            forceUpdate()
         } else {
           alert("Error occur while uploading file");
         }
       }, 1000);
+      
     } catch (error) {
       console.log(error);
       setError("Please upload again");
@@ -107,13 +134,43 @@ const File = () => {
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
+    
 
     try {
-      const response = await axios.delete(
-        `https://dull-puce-chicken-hat.cyclic.cloud/files/deleteFile/${id}`
-      );
-      console.log(response);
-      forceUpdate()
+      const conformation = confirm("Do you want to delete this photo??")
+      if(conformation){
+        const response = await axios.delete(
+          `https://dull-puce-chicken-hat.cyclic.cloud/files/deleteFile/${id}`
+        );
+        toast.success("Photo deleted", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(response);
+       setTimeout(() => {
+        forceUpdate()
+       }, 3000);
+        
+      }else{
+
+        toast.warning("Process cancelled", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+      }
     } catch (error) {
       console.log(error);
     }
@@ -142,6 +199,7 @@ const File = () => {
       </form> */}
       <div className="uploader">
         <span>Upload photo</span>
+        <br/>
         <input
           type="file"
           onChange={(e) => {
@@ -170,8 +228,9 @@ const File = () => {
               >
                 delete
               </span>
+              <ToastContainer/>
             </div>
-            <img src={db.file} height="200px" width="200px" />
+            <img src={db.file}  />
           </div>
         ))}
       </div>

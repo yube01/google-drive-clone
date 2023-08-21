@@ -3,6 +3,8 @@ import "./folder.scss";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { url } from "../utils/url";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -19,24 +21,89 @@ const Folders = ({ f, idF ,forceUpdate}) => {
 
   const handleEdit = async (e) => {
     e.preventDefault()
-    try {
-      const response = await axios.put(url + `/folder/editFolder/${idF}`,{
-        rename
+    if (rename.length === 0 ){
+      toast.error("Field is empty", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
-      console.log(response)
-      forceUpdate()
-    } catch (error) {
-      console.log(error);
+    }else{
+      try {
+        const response = await axios.put(url + `/folder/editFolder/${idF}`,{
+          rename
+        });
+        console.log(response)
+        toast.success("Folder name changed", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setTimeout(() => {
+          forceUpdate()
+          
+        }, 3000);
+      } catch (error) {
+        console.log(error);
+        toast.error("Error occur", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+
     }
+    
 
     
   };
   const handleDelete = async(e)=>{
     e.preventDefault();
     try {
-      const response = await axios.delete(url + `/folder/deleteFolder/${idF}`);
+      const del = confirm("Do you want to delete this folder ?")
+      if(del){
+        const response = await axios.delete(url + `/folder/deleteFolder/${idF}`);
+        toast.success("Folder deleted", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       console.log(response)
-      forceUpdate()
+      setTimeout(() => {
+        forceUpdate()
+      }, 3000);
+     
+      }else{
+        toast.warning("Process cancelled", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +151,7 @@ const Folders = ({ f, idF ,forceUpdate}) => {
         </form>
         }
         <span className="material-symbols-outlined" onClick={handleDelete}>delete</span>
+        <ToastContainer/>
       </div>
     </div>
   );

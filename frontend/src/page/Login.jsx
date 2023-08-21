@@ -43,12 +43,12 @@ const Login = () => {
           name,
           password,
         });
+        console.log(response)
   
         localStorage.setItem("user",JSON.stringify(response.data));
         
         setLogged(true)
-        navigate("/");
-        toast("Login Successful", {
+        toast.success("Login Successful", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -58,8 +58,16 @@ const Login = () => {
           progress: undefined,
           theme: "dark",
         });
+        
+        setTimeout(()=>{
+          navigate("/");
+
+        },5000)
+        
       } catch (error) {
-        toast("User credential is invalid", {
+        const loginError =  error.response.data
+        console.log(loginError)
+        toast.error(loginError, {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,

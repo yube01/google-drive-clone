@@ -1,3 +1,5 @@
+@import "../style.scss";
+
 .file{
 
     padding: 2rem;
@@ -5,11 +7,27 @@
         display: flex;
         margin-bottom: 2rem;
         align-items: center;
+        @include mobile{
+           display: flex;
+           flex-direction: column;
+            
+         }
         span{
             margin-right: 1rem;
             font-size: 1.5rem;
+            @include mobile{
+                margin-bottom: 1rem;
+                
+             }
         }
         input{
+            width: 15rem;
+            margin-right: 2rem;
+            @include mobile{
+              margin-bottom: 0.5rem;
+             
+                
+             }
             
         }
         button{
@@ -17,7 +35,11 @@
             padding: 0.5rem;
             background-color: skyblue;
             border-radius: 5px;
-            cursor: pointer;
+            cursor: pointer;@include mobile{
+                margin-bottom: 0.5rem;
+               
+                  
+               }
         }
         
     }
@@ -29,19 +51,31 @@
         gap: 1rem;
         .crud{
             position: absolute;
-            background-color: rgba(0, 0, 0, 0.275);
+            background-color: rgba(0, 0, 0, 0.824);
             padding: 0.5rem;
             
             display: flex;
             justify-content: space-between;
-            gap: 2rem;
+            cursor: pointer;
+            
             span{
                 color: white;
-                cursor: pointer;
+                
             }
         }
         img{
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            height: 20rem;
+            width: 20rem;
+            object-fit: cover;
+
+            @include mobile{
+                
+                height: 15rem;
+                width: 15rem;
+               
+                  
+               }
         }
         
     }

@@ -42,6 +42,7 @@ const Signup = () => {
             password,
           }
         );
+        console.log(response)
 
         toast.success("Register Successful", {
           position: "bottom-right",
@@ -54,9 +55,13 @@ const Signup = () => {
           theme: "dark",
         });
 
-        navigate("/login");
+        setTimeout(() => {
+          navigate("/login");
+          
+        }, 5000);
       } catch (error) {
-        toast("Register Failure", {
+        console.log(error)
+        toast.error("Register Failure", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
