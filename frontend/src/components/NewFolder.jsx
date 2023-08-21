@@ -47,7 +47,8 @@ const NewFolder = ({setFolder,folder,forceUpdate}) => {
                 theme: "dark",
               });
               setTimeout(() => {
-                forceUpdate()
+                navigate("/")
+                
               }, 3000);
               
             

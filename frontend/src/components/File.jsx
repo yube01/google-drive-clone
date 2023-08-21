@@ -52,7 +52,7 @@ const File = () => {
   //   const result = await axios.get("http://localhost:9000/fileDown")
   //   console.log(result.data)
   //   setGet(result.data)
-  // }
+  // }match
  
   useEffect(() => {
     const getFiles = async () => {
@@ -69,6 +69,7 @@ const File = () => {
 
   const handleSub = async () => {
     setFileName(selectImg.name);
+    console.log(selectImg.size)
 
     try {
       const formData = new FormData();
@@ -98,7 +99,7 @@ const File = () => {
       //   console.log("data saveed")
       // })
       
-
+      
       setTimeout(async () => {
         if (folderId) {
           const response = await axios.post(url + "/files/createFiles", {
@@ -127,7 +128,8 @@ const File = () => {
       }, 1000);
       
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      
       setError("Please upload again");
     }
   };
